@@ -1,0 +1,11 @@
+div#box {
+  width: 500px;
+  height: 500px;
+  background-color: #444444;
+  position: relative;
+}
+div#box > img {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+}
