@@ -1,4 +1,14 @@
-document.addEventListener("DOMContentLoaded",()=>{
+
+
+document.addEventListener("DOMContentLoaded",(e)=>{
+    let newTop = null;
+    let newLeft = null;
+    document.getElementById("position-form").addEventListener('submit', evt => {
+        evt.preventDefault();
+        newTop = document.getElementById("posTop").value;
+        newLeft = document.getElementById("posLeft").value
+    })
+
     const droneSize = 2 * document.getElementById("drone1").style.height;
     const directions = {
     left: 'left',
@@ -83,5 +93,4 @@ document.addEventListener("DOMContentLoaded",()=>{
         resetPosition();
     }
     resetPosition();
-
 });

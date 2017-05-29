@@ -12,7 +12,14 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
+    <div class="container">
+        <form id="position-form">
+            <label for="posTop">Position Top:</label>
+            <input type="number" class="form-control" id="posTop">
+            <label for="posLeft">Position Left:</label>
+            <input type="number" class="form-control" id="posLeft">
+            <input type="submit" value="Submit">
+        </form>
         <button id="reset-button" type="button" class="btn btn-primary">Reset</button>
         <button id="start-button" type="button" class="btn btn-primary">Start</button>
         <button id="stop-button" type="button" class="btn btn-primary">Stop</button>
