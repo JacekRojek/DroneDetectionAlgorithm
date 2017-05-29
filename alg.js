@@ -3,11 +3,7 @@
 document.addEventListener("DOMContentLoaded",(e)=>{
     let newTop = null;
     let newLeft = null;
-    document.getElementById("position-form").addEventListener('submit', evt => {
-        evt.preventDefault();
-        newTop = document.getElementById("posTop").value;
-        newLeft = document.getElementById("posLeft").value
-    })
+    let speed = 1;
 
     const droneSize = 2 * document.getElementById("drone1").style.height;
     const directions = {
@@ -17,14 +13,14 @@ document.addEventListener("DOMContentLoaded",(e)=>{
     let drone1 = {
     top: 100,
     left: 400,
-    topInit: 100,
-    leftInit: 400
+    topInit: 200,
+    leftInit: 200
     }
     let drone2 = {
     top: 400,
     left: 10,
-    topInit: 400,
-    leftInit: 10
+    topInit: 300,
+    leftInit: 110
     }
 
     const box = {
@@ -34,7 +30,6 @@ document.addEventListener("DOMContentLoaded",(e)=>{
     const drone1ref = document.getElementById("drone1");
     const drone2ref = document.getElementById("drone2");
 
-    const speed = 1;
     let drone1speed = speed
     let drone2speed = speed
 
@@ -45,12 +40,15 @@ document.addEventListener("DOMContentLoaded",(e)=>{
         drone1.top > box.height - droneSize ||
         drone1.left > box.width - droneSize) {
         drone1speed = -drone1speed;
+        resetPosition()
     }
     if (drone2.left < 0 + droneSize ||
         drone2.top < 0 + droneSize ||
         drone2.top > box.height - droneSize ||
         drone2.left > box.width - droneSize) {
         drone2speed = -drone2speed;
+        resetPosition()
+
     }
 
     if (Math.sqrt(Math.pow(Math.abs(drone1.left - drone2.left), 2) + Math.pow(Math.abs(drone1.top - drone2.top), 2)) < 100) {
@@ -58,6 +56,7 @@ document.addEventListener("DOMContentLoaded",(e)=>{
         console.log('collision')
     }
 
+console.log(drone1speed, drone2speed)
 
     drone1ref.style.left = drone1.left + drone1speed + 'px';
     drone1ref.style.top = drone1.top - drone1speed * modif + 'px';
@@ -93,4 +92,18 @@ document.addEventListener("DOMContentLoaded",(e)=>{
         resetPosition();
     }
     resetPosition();
+        document.getElementById("position-form").addEventListener('submit', evt => {
+        evt.preventDefault();
+        newTop = document.getElementById("posTop").value;
+        newLeft = document.getElementById("posLeft").value;
+        speed = document.getElementById("speed").value;
+        clearInterval(interval);
+        resetPosition()
+        drone1speed = speed
+        drone2speed = speed
+        console.log(drone1ref.style.left, drone1ref.style.top)
+        console.log(drone2ref.style.left, drone2ref.style.top)
+
+    })
+
 });
