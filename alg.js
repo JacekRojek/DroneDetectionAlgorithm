@@ -4,12 +4,9 @@ function css( element, property ) {
 }
 
 function translate( elementsArray, x, y ) {
-  let s = 0;
   elementsArray.forEach(function(elem,i) {
     if(i === 0 ) return
     else {
-    s= s+1
-    console.warn(s)
     var left = parseInt( css( elem, 'left' ), 10 ),
         top = parseInt( css( elem, 'top' ), 10 ),
         dx = left - x,
@@ -62,7 +59,6 @@ document.addEventListener("DOMContentLoaded",(e)=>{
       let  speed = 2
       interval = setInterval(() =>{ 
         speed += 5;
-        console.warn(speed)
         translate(img, speed, speed)
       }, 500);
     }
