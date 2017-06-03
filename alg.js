@@ -3,25 +3,28 @@ function css( element, property ) {
     return window.getComputedStyle( element, null ).getPropertyValue( property );
 }
 
-function translate( elementsArray, x, y ) {
-  elementsArray.forEach(function(elem,i) {
+function translate( elementsArray, drones, speed ) {
+  elementsArray.forEach(function(elem, i) {
     if(i === 0 ) return
     else {
-    var left = parseInt( css( elem, 'left' ), 10 ),
-        top = parseInt( css( elem, 'top' ), 10 ),
-        dx = left - x,
-        dy = top - y,
-        i = 1,
-        count = 20,
-        delay = 20;
-    
-    function loop() {
-        if ( i >= count ) { return; }
-        i += 1;
-        elem.style.left = ( left - ( dx * i / count ) ).toFixed( 0 ) + 'px';
-        elem.style.top = ( top - ( dy * i / count ) ).toFixed( 0 ) + 'px';
-        setTimeout( loop, delay );
-    }
+      const droneSpeed = parseInt(drones[i -1].speed)
+      const x = speed * droneSpeed;
+      const y = speed * droneSpeed;
+      var left = parseInt( css( elem, 'left' ), 10 ),
+          top = parseInt( css( elem, 'top' ), 10 ),
+          dx = left - x,
+          dy = top - y,
+          i = 1,
+          count = 20,
+          delay = 20;
+      
+      function loop() {
+          if ( i >= count ) { return; }
+          i += 1;
+          elem.style.left = ( left - ( dx * i / count ) ).toFixed( 0 ) + 'px';
+          elem.style.top = ( top - ( dy * i / count ) ).toFixed( 0 ) + 'px';
+          setTimeout( loop, delay );
+      }
     
     loop();
     }
@@ -56,10 +59,9 @@ document.addEventListener("DOMContentLoaded",(e)=>{
 
     document.getElementById('start-button').onclick = () => {
       const img = box.ref.childNodes
-      let  speed = 2
       interval = setInterval(() =>{ 
         speed += 5;
-        translate(img, speed, speed)
+        translate(img, drones, speed)
       }, 500);
     }
     document.getElementById('stop-button').onclick = () => {
